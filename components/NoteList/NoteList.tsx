@@ -18,7 +18,7 @@ export default function NoteList({ notes }: NoteListProps) {
 
     onSuccess: () => {
       toast.success('Note deleted successfully!');
-      queryClient.invalidateQueries({ queryKey: ['note'] });
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
     },
     onError: () => {
       toast.error('Something went wrong...Try again, please');

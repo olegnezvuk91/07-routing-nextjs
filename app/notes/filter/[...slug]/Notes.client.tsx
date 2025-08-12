@@ -17,22 +17,22 @@ import { Toaster } from 'react-hot-toast';
 import NoteForm from '@/components/NoteForm/NoteForm';
 import Modal from '@/components/Modal/Modal';
 
-import { NotesClientProps } from '@/types/note';
+import type { FetchNotesRes } from '@/lib/api';
 
-export default function NotesClient({
-  initialData,
-  initialPage,
-  initialSearch,
-  initialTag,
-}: NotesClientProps) {
-  const [search, setSearch] = useState(initialSearch);
-  const [page, setPage] = useState(initialPage);
+interface NotesClientProps {
+  initialData: FetchNotesRes;
+  tag: string | undefined;
+}
+
+export default function NotesClient({ initialData, tag }: NotesClientProps) {
+  const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [debouncedSearch] = useDebounce(search, 300);
 
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ['note', debouncedSearch, page, initialTag],
-    queryFn: () => fetchNotes(debouncedSearch, page, initialTag),
+    queryKey: ['notes', debouncedSearch, page, tag],
+    queryFn: () => fetchNotes(debouncedSearch, page, tag),
     placeholderData: keepPreviousData,
     initialData: debouncedSearch === '' && page === 1 ? initialData : undefined,
   });

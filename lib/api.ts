@@ -12,12 +12,14 @@ export interface FetchNotesRes {
 export async function fetchNotes(
   search: string,
   page: number,
+  tag?: string,
 ): Promise<FetchNotesRes> {
   const response = await axios.get<FetchNotesRes>(`${baseUrl}`, {
     params: {
       page: page,
       perPage: 12,
       ...(search && { search }),
+      ...(tag ? { tag } : {}),
     },
     headers: {
       Authorization: `Bearer ${myKey}`,
@@ -53,3 +55,16 @@ export async function fetchNoteById(id: string): Promise<Note> {
   });
   return response.data;
 }
+
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export const getCategories = async () => {
+  const res = await axios<Category[]>('/categories');
+  return res.data;
+};

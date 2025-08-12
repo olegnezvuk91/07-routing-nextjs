@@ -7,14 +7,22 @@
   color: white;
 }
 
-.header a {
+.header span {
+  color: #333;
+  background-color: #f4c430;
+  border-radius: 4px;
+  padding: 0px 2px;
+  margin-left: 2px;
+}
+
+.headerLink {
   text-decoration: none;
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.header a:hover {
+.headerLink:hover {
   color: #ddd;
 }
 
@@ -26,12 +34,17 @@
   gap: 1rem;
 }
 
-.navigation li a {
+.navigationItem {
+  display: flex;
+  align-items: center;
+}
+
+.navigationLink {
   text-decoration: none;
   color: white;
   font-size: 1rem;
 }
 
-.navigation li a:hover {
+.navigationLink:hover {
   color: #ddd;
 }
